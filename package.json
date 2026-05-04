@@ -10,6 +10,8 @@
     "build": "vite build",
     "preview": "vite preview --port 4173 --open",
     "serve": "vite preview --port 4173 --open",
+    "predeploy": "npm run build && type nul > dist\\.nojekyll",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint src --ext js,jsx",
     "clean": "rimraf node_modules/.vite dist"
   },
