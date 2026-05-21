@@ -6,7 +6,7 @@ export const categories = [
     name: "Immunity Boosters",
     slug: "immunity",
     description: "Strengthen your natural defense system",
-    image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=500",
+    image: "/ceteogry/11.png",
     icon: "🛡️",
     productCount: 15
   },
@@ -15,7 +15,7 @@ export const categories = [
     name: "Digestive Health",
     slug: "digestive-health",
     description: "Natural solutions for gut wellness",
-    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500",
+    image: "/ceteogry/12.png",
     icon: "💚",
     productCount: 12
   },
@@ -24,7 +24,7 @@ export const categories = [
     name: "Stress & Anxiety",
     slug: "stress-anxiety",
     description: "Calm your mind naturally",
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500",
+    image: "/ceteogry/13.png",
     icon: "🧘",
     productCount: 10
   },
@@ -33,7 +33,7 @@ export const categories = [
     name: "Energy & Vitality",
     slug: "energy-vitality",
     description: "Boost your stamina and strength",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500",
+    image: "/ceteogry/14.png",
     icon: "⚡",
     productCount: 8
   },
@@ -42,7 +42,7 @@ export const categories = [
     name: "Hair Care",
     slug: "hair-care",
     description: "Nourish your hair from roots",
-    image: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=500",
+    image: "/ceteogry/15.png",
     icon: "💇",
     productCount: 9
   },
@@ -51,7 +51,7 @@ export const categories = [
     name: "Skin Care",
     slug: "skin-care",
     description: "Radiant skin the Ayurvedic way",
-    image: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=500",
+    image: "/ceteogry/16.png",
     icon: "✨",
     productCount: 11
   },
@@ -60,7 +60,7 @@ export const categories = [
     name: "Brain Health",
     slug: "brain-health",
     description: "Enhance memory and focus",
-    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=500",
+    image: "/ceteogry/17.png",
     icon: "🧠",
     productCount: 7
   },
@@ -69,7 +69,7 @@ export const categories = [
     name: "Joint & Bone",
     slug: "joint-bone",
     description: "Support for healthy joints",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500",
+    image: "/ceteogry/18.png",
     icon: "🦴",
     productCount: 6
   }

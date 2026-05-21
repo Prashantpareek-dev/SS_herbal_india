@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+'use client';
+import Link from 'next/link';
 import { 
   FiFacebook, FiInstagram, FiTwitter, FiYoutube,
   FiMail, FiPhone, FiMapPin
@@ -28,6 +29,7 @@ const Footer = () => {
               src="/Images/image.png" 
               alt="Ss Herbal India" 
               className="h-30 w-auto mb-4 "
+              loading="lazy"
             />
             <p className="text-sm leading-relaxed mb-4">
               SS Herbal India provides premium Ayurvedic nutrition products made from 100% natural ingredients. 
@@ -39,10 +41,10 @@ const Footer = () => {
               <div className="bg-white text-green-600 px-3 py-1 rounded text-xs font-bold">
                 GMP
               </div>
-              <div className="bg-white text-blue-600 px-3 py-1 rounded text-xs font-bold">
+              <div className="bg-white text-green-700 px-3 py-1 rounded text-xs font-bold">
                 ISO 22000
               </div>
-              <div className="bg-white text-orange-600 px-3 py-1 rounded text-xs font-bold">
+              <div className="bg-white text-green-800 px-3 py-1 rounded text-xs font-bold">
                 FSSAI
               </div>
             </div>
@@ -50,30 +52,30 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-semibold text-lg mb-4">Quick Links</h3>
+            <h3 className="text-white font-semibold text-lg mb-4 font-subheading">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/about" className="hover:text-white transition-colors">
+                <Link href="/about" className="hover:text-white transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/products" className="hover:text-white transition-colors">
+                <Link href="/products" className="hover:text-white transition-colors">
                   Shop All Products
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-white transition-colors">
+                <Link href="/contact" className="hover:text-white transition-colors">
                   Contact Us
                 </Link>
               </li>
               <li>
-                <Link to="/faq" className="hover:text-white transition-colors">
+                <Link href="/faq" className="hover:text-white transition-colors">
                   FAQs
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="hover:text-white transition-colors">
+                <Link href="/blog" className="hover:text-white transition-colors">
                   Health Blog
                 </Link>
               </li>
@@ -82,30 +84,30 @@ const Footer = () => {
 
           {/* Customer Service */}
           <div>
-            <h3 className="text-white font-semibold text-lg mb-4">Customer Service</h3>
+            <h3 className="text-white font-semibold text-lg mb-4 font-subheading">Customer Service</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/shipping" className="hover:text-white transition-colors">
+                <Link href="/shipping" className="hover:text-white transition-colors">
                   Shipping & Delivery
                 </Link>
               </li>
               <li>
-                <Link to="/returns" className="hover:text-white transition-colors">
+                <Link href="/returns" className="hover:text-white transition-colors">
                   Returns & Refunds
                 </Link>
               </li>
               <li>
-                <Link to="/privacy" className="hover:text-white transition-colors">
+                <Link href="/privacy" className="hover:text-white transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link to="/terms" className="hover:text-white transition-colors">
+                <Link href="/terms" className="hover:text-white transition-colors">
                   Terms & Conditions
                 </Link>
               </li>
               <li>
-                <Link to="/track-order" className="hover:text-white transition-colors">
+                <Link href="/track-order" className="hover:text-white transition-colors">
                   Track Your Order
                 </Link>
               </li>
@@ -114,7 +116,7 @@ const Footer = () => {
 
           {/* Contact & Newsletter */}
           <div>
-            <h3 className="text-white font-semibold text-lg mb-4">Contact Us</h3>
+            <h3 className="text-white font-semibold text-lg mb-4 font-subheading">Contact Us</h3>
             <ul className="space-y-3 mb-6">
               <li className="flex items-start gap-2">
                 <FiMapPin className="mt-1 flex-shrink-0" size={18} />

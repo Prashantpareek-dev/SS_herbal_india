@@ -1,0 +1,227 @@
+/* ============================================
+   FIBONACCI DESIGN SYSTEM
+   Based on Golden Ratio (1.618) for Visual Harmony
+   Sequence: 3, 5, 8, 13, 21, 34, 55, 89, 144
+   ============================================ */
+
+:root {
+  /* Fibonacci Spacing Scale (in pixels) */
+  --fib-1: 3px;
+  --fib-2: 5px;
+  --fib-3: 8px;
+  --fib-4: 13px;
+  --fib-5: 21px;
+  --fib-6: 34px;
+  --fib-7: 55px;
+  --fib-8: 89px;
+  --fib-9: 144px;
+  --fib-10: 233px;
+
+  /* Golden Ratio */
+  --golden-ratio: 1.618;
+
+  /* Typography Scale (Fibonacci-based) */
+  --text-xs: 13px;    /* fib-4 */
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-md: 21px;    /* fib-5 */
+  --text-lg: 24px;
+  --text-xl: 34px;    /* fib-6 */
+  --text-2xl: 42px;
+  --text-3xl: 55px;   /* fib-7 */
+  --text-4xl: 68px;
+  --text-5xl: 89px;   /* fib-8 */
+}
+
+/* ============================================
+   FIBONACCI SPACING UTILITIES
+   ============================================ */
+
+/* Padding */
+.fib-p-1 { padding: var(--fib-1); }
+.fib-p-2 { padding: var(--fib-2); }
+.fib-p-3 { padding: var(--fib-3); }
+.fib-p-4 { padding: var(--fib-4); }
+.fib-p-5 { padding: var(--fib-5); }
+.fib-p-6 { padding: var(--fib-6); }
+.fib-p-7 { padding: var(--fib-7); }
+.fib-p-8 { padding: var(--fib-8); }
+.fib-p-9 { padding: var(--fib-9); }
+
+/* Margin */
+.fib-m-1 { margin: var(--fib-1); }
+.fib-m-2 { margin: var(--fib-2); }
+.fib-m-3 { margin: var(--fib-3); }
+.fib-m-4 { margin: var(--fib-4); }
+.fib-m-5 { margin: var(--fib-5); }
+.fib-m-6 { margin: var(--fib-6); }
+.fib-m-7 { margin: var(--fib-7); }
+.fib-m-8 { margin: var(--fib-8); }
+.fib-m-9 { margin: var(--fib-9); }
+
+/* Margin Top */
+.fib-mt-5 { margin-top: var(--fib-5); }
+.fib-mt-6 { margin-top: var(--fib-6); }
+.fib-mt-7 { margin-top: var(--fib-7); }
+.fib-mt-8 { margin-top: var(--fib-8); }
+.fib-mt-9 { margin-top: var(--fib-9); }
+
+/* Margin Bottom */
+.fib-mb-5 { margin-bottom: var(--fib-5); }
+.fib-mb-6 { margin-bottom: var(--fib-6); }
+.fib-mb-7 { margin-bottom: var(--fib-7); }
+.fib-mb-8 { margin-bottom: var(--fib-8); }
+.fib-mb-9 { margin-bottom: var(--fib-9); }
+
+/* Gap */
+.fib-gap-3 { gap: var(--fib-3); }
+.fib-gap-4 { gap: var(--fib-4); }
+.fib-gap-5 { gap: var(--fib-5); }
+.fib-gap-6 { gap: var(--fib-6); }
+.fib-gap-7 { gap: var(--fib-7); }
+
+/* ============================================
+   FIBONACCI TYPOGRAPHY
+   ============================================ */
+
+.fib-text-xs { font-size: var(--text-xs); line-height: 1.618; }
+.fib-text-sm { font-size: var(--text-sm); line-height: 1.618; }
+.fib-text-base { font-size: var(--text-base); line-height: 1.618; }
+.fib-text-md { font-size: var(--text-md); line-height: 1.618; }
+.fib-text-lg { font-size: var(--text-lg); line-height: 1.618; }
+.fib-text-xl { font-size: var(--text-xl); line-height: 1.618; }
+.fib-text-2xl { font-size: var(--text-2xl); line-height: 1.618; }
+.fib-text-3xl { font-size: var(--text-3xl); line-height: 1.5; }
+.fib-text-4xl { font-size: var(--text-4xl); line-height: 1.4; }
+.fib-text-5xl { font-size: var(--text-5xl); line-height: 1.2; }
+
+/* ============================================
+   FIBONACCI LAYOUT SECTIONS
+   ============================================ */
+
+/* Section Padding using Fibonacci */
+.fib-section-sm { padding: var(--fib-6) 0; }      /* 34px = small sections */
+.fib-section-md { padding: var(--fib-7) 0; }      /* 55px = medium sections */
+.fib-section-lg { padding: var(--fib-8) 0; }      /* 89px = large sections */
+.fib-section-xl { padding: var(--fib-9) 0; }      /* 144px = extra large */
+
+/* Container Max-Width based on Golden Ratio */
+.fib-container-sm { max-width: 610px; }           /* 377 × 1.618 */
+.fib-container-md { max-width: 987px; }           /* 610 × 1.618 */
+.fib-container-lg { max-width: 1597px; }          /* 987 × 1.618 */
+
+/* ============================================
+   GOLDEN RATIO GRID SYSTEM
+   ============================================ */
+
+/* Two-column layout using Golden Ratio (61.8% / 38.2%) */
+.golden-grid-2 {
+  display: grid;
+  grid-template-columns: 1.618fr 1fr;
+  gap: var(--fib-6);
+}
+
+/* Three-column using Fibonacci */
+.golden-grid-3 {
+  display: grid;
+  grid-template-columns: 3fr 5fr 8fr;
+  gap: var(--fib-5);
+}
+
+/* Card Heights following Fibonacci */
+.fib-card-sm { min-height: 144px; }   /* fib-9 */
+.fib-card-md { min-height: 233px; }   /* fib-10 */
+.fib-card-lg { min-height: 377px; }   /* fib-11 */
+
+/* ============================================
+   FIBONACCI BORDER RADIUS
+   ============================================ */
+
+.fib-rounded-sm { border-radius: var(--fib-3); }   /* 8px */
+.fib-rounded-md { border-radius: var(--fib-4); }   /* 13px */
+.fib-rounded-lg { border-radius: var(--fib-5); }   /* 21px */
+.fib-rounded-xl { border-radius: var(--fib-6); }   /* 34px */
+
+/* ============================================
+   VISUAL HIERARCHY using Fibonacci
+   ============================================ */
+
+/* Element sizing progression */
+.fib-size-1 { width: var(--fib-6); height: var(--fib-6); }    /* 34px */
+.fib-size-2 { width: var(--fib-7); height: var(--fib-7); }    /* 55px */
+.fib-size-3 { width: var(--fib-8); height: var(--fib-8); }    /* 89px */
+.fib-size-4 { width: var(--fib-9); height: var(--fib-9); }    /* 144px */
+
+/* ============================================
+   RESPONSIVE FIBONACCI SPACING
+   ============================================ */
+
+@media (max-width: 768px) {
+  .fib-section-sm { padding: var(--fib-5) 0; }    /* 21px on mobile */
+  .fib-section-md { padding: var(--fib-6) 0; }    /* 34px on mobile */
+  .fib-section-lg { padding: var(--fib-7) 0; }    /* 55px on mobile */
+  .fib-section-xl { padding: var(--fib-8) 0; }    /* 89px on mobile */
+}
+
+/* ============================================
+   FIBONACCI SHADOWS (Depth using sequence)
+   ============================================ */
+
+.fib-shadow-sm {
+  box-shadow: 0 var(--fib-1) var(--fib-3) rgba(0, 0, 0, 0.1);
+}
+
+.fib-shadow-md {
+  box-shadow: 0 var(--fib-2) var(--fib-4) rgba(0, 0, 0, 0.12);
+}
+
+.fib-shadow-lg {
+  box-shadow: 0 var(--fib-3) var(--fib-5) rgba(0, 0, 0, 0.15);
+}
+
+.fib-shadow-xl {
+  box-shadow: 0 var(--fib-4) var(--fib-6) rgba(0, 0, 0, 0.18);
+}
+
+/* ============================================
+   ANIMATION TIMING using Fibonacci
+   ============================================ */
+
+.fib-transition-fast { transition: all 233ms ease; }     /* fib-10 in ms */
+.fib-transition-base { transition: all 377ms ease; }     /* fib-11 in ms */
+.fib-transition-slow { transition: all 610ms ease; }     /* fib-12 in ms */
+
+/* ============================================
+   ASPECT RATIOS based on Golden Ratio
+   ============================================ */
+
+.aspect-golden {
+  aspect-ratio: 1.618 / 1;
+}
+
+.aspect-golden-reverse {
+  aspect-ratio: 1 / 1.618;
+}
+
+/* ============================================
+   USAGE EXAMPLES IN COMMENTS
+   ============================================ */
+
+/*
+  EXAMPLE 1: Section with Fibonacci spacing
+  <section className="fib-section-md fib-mb-8">
+    <h2 className="fib-text-3xl fib-mb-6">Title</h2>
+    <p className="fib-text-base">Content</p>
+  </section>
+
+  EXAMPLE 2: Golden Ratio Grid
+  <div className="golden-grid-2">
+    <div>Main content (61.8%)</div>
+    <div>Sidebar (38.2%)</div>
+  </div>
+
+  EXAMPLE 3: Card with Fibonacci proportions
+  <div className="fib-card-md fib-p-6 fib-rounded-lg fib-shadow-md">
+    Card content
+  </div>
+*/

@@ -1,60 +1,82 @@
-import { FiShield, FiTruck, FiAward, FiHeadphones } from 'react-icons/fi';
-import { motion } from 'framer-motion';
-
 const features = [
   {
-    icon: <FiShield size={40} />,
-    title: "100% Natural",
-    description: "Certified organic ingredients, no harmful chemicals"
+    number: "01",
+    title: "Supported By Science, Curated For Perfection",
+    description: "At SS Herbal India's, we believe that modern problems need modern solutions. Thus, we infuse Ayurveda with scientific research with the help of leading Ayurvedic practitioners and medicine. All products are tested under a human-cased by the WHO Drug Authority by AYUSH, WHO quality labelling, and supported by experts.",
+    image: "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400",
+    bgColor: "bg-green-50"
   },
   {
-    icon: <FiAward size={40} />,
-    title: "GMP & ISO Certified",
-    description: "Quality tested and approved by regulatory bodies"
+    number: "02",
+    title: "Not Just Ingredients– We Source The Best of Nature for Ayurvedic Potency",
+    description: "Our ethos centers on quality and potency derived from nature's best. That's why we source our ingredients from along the Western Ghats, nestled in the hills. Quality matters to us, and it's about safe from the best products. All the products are produced under GMP-certified facilities and are free from any harmful ingredients.",
+    image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400",
+    bgColor: "bg-pink-50",
+    reverse: true
   },
   {
-    icon: <FiTruck size={40} />,
-    title: "Free Shipping",
-    description: "On all orders above ₹499 across India"
-  },
-  {
-    icon: <FiHeadphones size={40} />,
-    title: "24/7 Support",
-    description: "Expert Ayurvedic consultants available always"
+    number: "03",
+    title: "Ayurveda is Not Just a Medicine, It's a Way of Living",
+    description: "We encourage our customers to follow an Ayurvedic lifestyle that emphasizes holistic wellness and guided wellness practices to enhance the effectiveness of Ayurveda. Ayurveda takes life days to transform your health.",
+    image: "https://images.unsplash.com/photo-1616795794687-e3c2e273cd6d?w=400",
+    bgColor: "bg-green-50"
   }
 ];
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-16 bg-gradient-to-br from-green-50 to-blue-50">
+    <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
       <div className="container-custom">
-        <div className="text-center mb-12">
-          <h2 className="section-title">Why Choose SS Herbal India?</h2>
-          <p className="section-subtitle">
-            Trusted by thousands for authentic Ayurvedic wellness
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 font-heading">
+            SS Herbal India's — Your Trusted Ayurvedic Online Shop For Health & Wellness
+          </h2>
+          <p className="text-lg text-gray-600 max-w-4xl mx-auto font-body">
+            Discover the ancient wisdom of Ayurveda brought to modern life. We are committed to bringing wellness through nature's best remedies, 
+            lovingly sent and delivering the most essential support benefits to your doorstep. Experts at SS Herbal India's work day and night to combine 
+            centuries-old Ayurvedic wisdom to make this world a better place, effective, and invest in the current wisdom of traditional medicines.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="space-y-8">
           {features.map((feature, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white p-6 rounded-xl shadow-card hover:shadow-card-hover transition-all duration-300 text-center"
+              className={`${feature.bgColor} rounded-3xl p-8 md:p-12 relative overflow-hidden`}
             >
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-primary/10 text-primary rounded-full mb-4">
-                {feature.icon}
+              <div className={`grid md:grid-cols-2 gap-8 items-center ${feature.reverse ? 'md:grid-flow-dense' : ''}`}>
+                {/* Text Content */}
+                <div className={feature.reverse ? 'md:col-start-2' : ''}>
+                  <div className="text-6xl md:text-8xl font-bold text-green-600 opacity-20 mb-4">
+                    {feature.number}
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 font-subheading">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed font-body">
+                    {feature.description}
+                  </p>
+                </div>
+
+                {/* Image */}
+                <div className={feature.reverse ? 'md:col-start-1 md:row-start-1' : ''}>
+                  <div className="relative">
+                    <img
+                      src={feature.image}
+                      alt={feature.title}
+                      className="rounded-2xl w-full h-64 md:h-80 object-cover shadow-lg"
+                      loading="lazy"
+                    />
+                    <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-green-600 rounded-full opacity-10"></div>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                {feature.title}
-              </h3>
-              <p className="text-gray-600">
-                {feature.description}
-              </p>
-            </motion.div>
+
+              {/* Decorative Number */}
+              <div className="absolute top-8 right-8 text-9xl font-bold text-green-600 opacity-5">
+                {feature.number}
+              </div>
+            </div>
           ))}
         </div>
       </div>

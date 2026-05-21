@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+'use client';
+import Link from 'next/link';
 import { categories } from '../../data/categories';
 import { motion } from 'framer-motion';
 
@@ -23,7 +24,7 @@ const CategoryGrid = () => {
               transition={{ delay: index * 0.1 }}
             >
               <Link
-                to={`/products/${category.slug}`}
+                href={`/products/${category.slug}`}
                 className="group block bg-white rounded-xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300"
               >
                 <div className="relative h-48 overflow-hidden">
@@ -31,11 +32,12 @@ const CategoryGrid = () => {
                     src={category.image}
                     alt={category.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
                     <div className="text-white">
                       <div className="text-3xl mb-1">{category.icon}</div>
-                      <h3 className="font-semibold text-lg">{category.name}</h3>
+                      <h3 className="font-semibold text-lg font-subheading">{category.name}</h3>
                     </div>
                   </div>
                 </div>

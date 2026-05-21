@@ -1,64 +1,36 @@
+'use client';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
+import { fetchHeroBanners, trackBannerClick } from '../../services/api';
+import { normalizeBannerList } from '../../services/normalizers';
 
-const slides = [
-  {
-    id: 1,
-    title: "100% Natural Ayurvedic Solutions",
-    subtitle: "Trusted Wellness for Over 5000 Years",
-    description: "Experience the power of pure, authentic Ayurvedic products",
-    image: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=1920&h=600&fit=crop",
-    cta: "Shop Now",
-    link: "/products",
-    bg: "from-green-600/90 to-green-800/90"
-  },
-  {
-    id: 2,
-    title: "Boost Your Immunity Naturally",
-    subtitle: "25% OFF on All Immunity Products",
-    description: "Strengthen your defense with our certified herbal formulations",
-    image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=1920&h=600&fit=crop",
-    cta: "Explore Immunity Range",
-    link: "/products/immunity",
-    bg: "from-blue-600/90 to-blue-800/90"
-  },
-  {
-    id: 3,
-    title: "New Launch: Shilajit Resin",
-    subtitle: "Pure Himalayan Shilajit for Energy & Vitality",
-    description: "Sourced from 18,000 ft altitude | 60% Fulvic Acid",
-    image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=1920&h=600&fit=crop",
-    cta: "Buy Now",
-    link: "/product/shilajit-resin",
-    bg: "from-orange-600/90 to-orange-800/90"
-  },
-  {
-    id: 4,
-    title: "GMP & ISO Certified Products",
-    subtitle: "Quality You Can Trust",
-    description: "All products tested for purity and potency",
-    image: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=1920&h=600&fit=crop",
-    cta: "Learn More",
-    link: "/about",
-    bg: "from-teal-600/90 to-teal-800/90"
-  },
-  {
-    id: 5,
-    title: "Free Shipping on Orders ₹499+",
-    subtitle: "Wellness Delivered to Your Doorstep",
-    description: "Pan India delivery | Cash on Delivery Available",
-    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=1920&h=600&fit=crop",
-    cta: "Start Shopping",
-    link: "/products",
-    bg: "from-purple-600/90 to-purple-800/90"
-  }
-];
-
-const HeroBanner = () => {
+const HeroBanner = ({ initialSlides = [] }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0);
+  // Start with SSR slides immediately — no black screen
+  const [slides, setSlides] = useState(initialSlides);
+
+  // Try API after mount — updates slides if API returns fresher data
+  useEffect(() => {
+    fetchHeroBanners('homepage_hero')
+      .then(res => {
+        const list = res?.data?.banners || [];
+        if (list.length > 0) {
+          const normalized = normalizeBannerList(list).filter(b => b.image);
+          if (normalized.length > 0) {
+            setSlides(normalized);
+            return;
+          }
+        }
+        // API empty — keep initialSlides already in state
+        if (slides.length === 0) setSlides(initialSlides);
+      })
+      .catch(() => {
+        if (slides.length === 0) setSlides(initialSlides);
+      });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Auto-advance slides
   useEffect(() => {
@@ -67,7 +39,7 @@ const HeroBanner = () => {
     }, 5000); // Change slide every 5 seconds
 
     return () => clearInterval(timer);
-  }, [currentSlide]);
+  }, [currentSlide, slides.length]);
 
   const nextSlide = () => {
     setDirection(1);
@@ -84,9 +56,16 @@ const HeroBanner = () => {
     setCurrentSlide(index);
   };
 
+  const handleBannerCTAClick = (slide) => {
+    if (slide.id && String(slide.id).length > 10) {
+      // Looks like a MongoDB ObjectId — track the click
+      trackBannerClick(slide.id).catch(() => {});
+    }
+  };
+
   const slideVariants = {
     enter: (direction) => ({
-      x: direction > 0 ? 1000 : -1000,
+      x: direction > 0 ? '100%' : '-100%',
       opacity: 0
     }),
     center: {
@@ -96,13 +75,15 @@ const HeroBanner = () => {
     },
     exit: (direction) => ({
       zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
+      x: direction < 0 ? '100%' : '-100%',
       opacity: 0
     })
   };
 
+  if (slides.length === 0) return null;
+
   return (
-    <div className="relative h-[500px] md:h-[600px] overflow-hidden bg-gray-900">
+    <div className="relative h-[500px] md:h-[600px] overflow-hidden bg-gray-100">
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={currentSlide}
@@ -112,19 +93,33 @@ const HeroBanner = () => {
           animate="center"
           exit="exit"
           transition={{
-            x: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.2 }
+            x: { type: 'tween', ease: 'easeInOut', duration: 0.4 },
+            opacity: { duration: 0.15 }
           }}
           className="absolute inset-0"
         >
-          {/* Background Image */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${slides[currentSlide].image})` }}
-          />
+          {/* Responsive banner image — no JS resize listener needed */}
+          <picture className="absolute inset-0 w-full h-full">
+            {slides[currentSlide].mobileImage && (
+              <source
+                media="(max-width: 767px)"
+                srcSet={slides[currentSlide].mobileImage}
+              />
+            )}
+            <img
+              src={slides[currentSlide].image}
+              alt={slides[currentSlide].title || `Banner ${currentSlide + 1}`}
+              className="w-full h-full object-cover"
+              loading={currentSlide === 0 ? 'eager' : 'lazy'}
+              fetchPriority={currentSlide === 0 ? 'high' : 'auto'}
+              decoding="async"
+            />
+          </picture>
           
-          {/* Gradient Overlay */}
-          <div className={`absolute inset-0 bg-gradient-to-r ${slides[currentSlide].bg}`} />
+          {/* Gradient Overlay — only when a bg style is set */}
+          {slides[currentSlide].bg && (
+            <div className={`absolute inset-0 bg-gradient-to-r ${slides[currentSlide].bg}`} />
+          )}
 
           {/* Content */}
           <div className="relative h-full container-custom flex items-center">
@@ -133,7 +128,7 @@ const HeroBanner = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-lg md:text-xl mb-2 font-medium"
+                className="text-lg md:text-xl mb-2 font-medium font-subheading"
               >
                 {slides[currentSlide].subtitle}
               </motion.p>
@@ -142,7 +137,7 @@ const HeroBanner = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="text-4xl md:text-6xl font-bold mb-4"
+                className="text-4xl md:text-6xl font-bold mb-4 font-heading"
               >
                 {slides[currentSlide].title}
               </motion.h1>
@@ -151,7 +146,7 @@ const HeroBanner = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="text-lg md:text-xl mb-8"
+                className="text-lg md:text-xl mb-8 font-body"
               >
                 {slides[currentSlide].description}
               </motion.p>
@@ -161,12 +156,15 @@ const HeroBanner = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
               >
-                <Link
-                  to={slides[currentSlide].link}
-                  className="inline-block bg-white text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg"
-                >
-                  {slides[currentSlide].cta}
-                </Link>
+                {slides[currentSlide].cta && slides[currentSlide].link && (
+                  <Link
+                    href={slides[currentSlide].link}
+                    onClick={() => handleBannerCTAClick(slides[currentSlide])}
+                    className="inline-block bg-white text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg"
+                  >
+                    {slides[currentSlide].cta}
+                  </Link>
+                )}
               </motion.div>
             </div>
           </div>

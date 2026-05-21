@@ -8,12 +8,12 @@ const StarRating = ({ rating = 0, maxRating = 5, size = 16, showCount = false, c
     if (i <= rating) {
       // Full star
       stars.push(
-        <FaStar key={i} size={size} className="text-yellow-400" />
+        <FaStar key={i} size={size} className="text-green-500" />
       );
     } else if (i - 0.5 <= rating) {
       // Half star
       stars.push(
-        <FaStarHalfAlt key={i} size={size} className="text-yellow-400" />
+        <FaStarHalfAlt key={i} size={size} className="text-green-500" />
       );
     } else {
       // Empty star

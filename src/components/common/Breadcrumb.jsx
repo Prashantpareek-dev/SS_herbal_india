@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+'use client';
+import Link from 'next/link';
 import { FiChevronRight, FiHome } from 'react-icons/fi';
 
 const Breadcrumb = ({ items }) => {
@@ -8,7 +9,7 @@ const Breadcrumb = ({ items }) => {
         <ol className="flex items-center gap-2 text-sm">
           <li>
             <Link 
-              to="/" 
+              href="/" 
               className="flex items-center gap-1 text-gray-600 hover:text-primary transition-colors"
             >
               <FiHome size={16} />
@@ -21,7 +22,7 @@ const Breadcrumb = ({ items }) => {
               <FiChevronRight className="text-gray-400" size={14} />
               {item.link ? (
                 <Link 
-                  to={item.link} 
+                  href={item.link} 
                   className="text-gray-600 hover:text-primary transition-colors"
                 >
                   {item.label}

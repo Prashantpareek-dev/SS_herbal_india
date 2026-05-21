@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
 import { FaStar } from 'react-icons/fa';
+import { fetchTestimonials } from '../../services/api';
+import { normalizeTestimonialList } from '../../services/normalizers';
+import useApi from '../../hooks/useApi';
 
-const testimonials = [
+const demoTestimonials = [
   {
     id: 1,
     name: "Priya Sharma",
@@ -45,6 +48,15 @@ const testimonials = [
 ];
 
 const CustomerTestimonials = () => {
+  const { data: testimonials } = useApi(
+    async () => {
+      const res = await fetchTestimonials({ featured: true, limit: 8 });
+      const list = res?.data?.testimonials || [];
+      return list.length > 0 ? normalizeTestimonialList(list) : demoTestimonials;
+    },
+    demoTestimonials
+  );
+
   return (
     <section className="py-16 bg-gradient-to-b from-white to-green-50">
       <div className="container mx-auto px-4">
@@ -54,7 +66,7 @@ const CustomerTestimonials = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+            className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-heading"
           >
             Real People, Real Stories
           </motion.h2>
@@ -63,7 +75,7 @@ const CustomerTestimonials = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-gray-600 text-lg max-w-2xl mx-auto"
+            className="text-gray-600 text-lg max-w-2xl mx-auto font-body"
           >
             Hear from our satisfied customers who transformed their health naturally
           </motion.p>
@@ -86,6 +98,7 @@ const CustomerTestimonials = () => {
                   src={testimonial.image}
                   alt={testimonial.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
                 />
                 {testimonial.verified && (
                   <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
@@ -99,7 +112,7 @@ const CustomerTestimonials = () => {
                 {/* Rating */}
                 <div className="flex gap-1 mb-3">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <FaStar key={i} className="text-yellow-400 text-sm" />
+                    <FaStar key={i} className="text-green-500 text-sm" />
                   ))}
                 </div>
 

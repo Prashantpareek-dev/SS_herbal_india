@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+'use client';
+import Link from 'next/link';
 import { FiHeart, FiShoppingCart, FiEye } from 'react-icons/fi';
 import StarRating from '../common/StarRating';
 import useCartStore from '../../store/cartStore';
@@ -32,15 +33,21 @@ const ProductCard = ({ product }) => {
       whileHover={{ y: -5 }}
       className="product-card group relative"
     >
-      <Link to={`/product/${product.slug}`}>
+      <Link href={`/product/${product.slug}`}>
         {/* Image Container */}
         <div className="relative overflow-hidden bg-gray-100 h-64">
-          <img
-            src={product.images[0]}
-            alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-            loading="lazy"
-          />
+          {product.images?.[0] ? (
+            <img
+              src={product.images[0]}
+              alt={product.name}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              loading="lazy"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gray-100">
+              <span className="text-6xl opacity-30">🌿</span>
+            </div>
+          )}
           
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-2">
@@ -60,7 +67,7 @@ const ProductCard = ({ product }) => {
           <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
             <button
               onClick={handleWishlist}
-              className={`p-2 rounded-full ${inWishlist ? 'bg-red-500 text-white' : 'bg-white text-gray-700'} hover:scale-110 transition-transform shadow-md`}
+              className={`p-2 rounded-full ${inWishlist ? 'bg-green-500 text-white' : 'bg-white text-gray-700'} hover:scale-110 transition-transform shadow-md`}
             >
               <FiHeart size={18} fill={inWishlist ? 'currentColor' : 'none'} />
             </button>
@@ -136,7 +143,7 @@ const ProductCard = ({ product }) => {
           ) : (
             <>
               <FiShoppingCart size={18} />
-              <span className="uppercase tracking-wide">Buy Now</span>
+              <span className="uppercase tracking-wide">Add to Cart</span>
             </>
           )}
         </button>

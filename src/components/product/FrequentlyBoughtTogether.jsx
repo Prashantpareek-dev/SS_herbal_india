@@ -1,5 +1,6 @@
+'use client';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { FaPlus, FaEquals } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { formatPrice } from '../../utils/helpers';
@@ -111,6 +112,7 @@ const FrequentlyBoughtTogether = ({ currentProduct, suggestedProducts }) => {
                       src={product.images[0]}
                       alt={product.name}
                       className="w-full h-full object-contain"
+                      loading="lazy"
                     />
                   </div>
 

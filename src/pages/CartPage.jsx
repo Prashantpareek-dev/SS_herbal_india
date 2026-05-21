@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+'use client';
+import Link from 'next/link';
 import { FiTrash2, FiPlus, FiMinus, FiShoppingBag } from 'react-icons/fi';
 import useCartStore from '../store/cartStore';
 import Breadcrumb from '../components/common/Breadcrumb';
@@ -20,7 +21,7 @@ const CartPage = () => {
             <FiShoppingBag className="mx-auto text-gray-400 mb-4" size={80} />
             <h2 className="text-2xl font-bold mb-2">Your cart is empty</h2>
             <p className="text-gray-600 mb-6">Add some products to get started!</p>
-            <Link to="/products" className="btn-primary inline-block">
+            <Link href="/products" className="btn-primary inline-block">
               Continue Shopping
             </Link>
           </div>
@@ -46,17 +47,18 @@ const CartPage = () => {
                   className={`p-6 flex gap-4 ${index !== items.length - 1 ? 'border-b' : ''}`}
                 >
                   {/* Product Image */}
-                  <Link to={`/product/${item.slug}`} className="flex-shrink-0">
+                  <Link href={`/product/${item.slug}`} className="flex-shrink-0">
                     <img
                       src={item.images[0]}
                       alt={item.name}
                       className="w-24 h-24 object-cover rounded-lg"
+                      loading="lazy"
                     />
                   </Link>
 
                   {/* Product Details */}
                   <div className="flex-1">
-                    <Link to={`/product/${item.slug}`}>
+                    <Link href={`/product/${item.slug}`}>
                       <h3 className="font-semibold text-gray-800 hover:text-primary mb-2">
                         {item.name}
                       </h3>
@@ -80,7 +82,7 @@ const CartPage = () => {
                   <div className="flex flex-col items-end justify-between">
                     <button
                       onClick={() => removeItem(item.id, item.variant)}
-                      className="text-red-500 hover:text-red-700 transition-colors"
+                      className="text-green-500 hover:text-green-700 transition-colors"
                     >
                       <FiTrash2 size={20} />
                     </button>
@@ -113,7 +115,7 @@ const CartPage = () => {
             </div>
 
             <Link 
-              to="/products" 
+              href="/products" 
               className="inline-block mt-4 text-primary font-medium hover:underline"
             >
               ← Continue Shopping
@@ -143,8 +145,8 @@ const CartPage = () => {
               </div>
 
               {shipping > 0 && (
-                <div className="bg-blue-50 border border-blue-200 p-3 rounded-lg mb-4">
-                  <p className="text-sm text-blue-800">
+                <div className="bg-green-50 border border-green-200 p-3 rounded-lg mb-4">
+                  <p className="text-sm text-green-800">
                     Add ₹{499 - subtotal} more to get FREE shipping!
                   </p>
                 </div>
@@ -155,7 +157,7 @@ const CartPage = () => {
                 <span className="text-primary">₹{total}</span>
               </div>
 
-              <Link to="/checkout" className="btn-primary w-full block text-center mb-3">
+              <Link href="/checkout" className="btn-primary w-full block text-center mb-3">
                 Proceed to Checkout
               </Link>
 

@@ -4,8 +4,11 @@ import StarRating from '../common/StarRating';
 import ReviewsSection from './ReviewsSection';
 import FAQAccordion from '../common/FAQAccordion';
 
-const ProductTabs = ({ product }) => {
+const ProductTabs = ({ product, reviews: propReviews, testimonials: propTestimonials }) => {
   const [activeTab, setActiveTab] = useState('overview');
+
+  const reviews = propReviews || [];
+  const reviewCount = propReviews ? propReviews.length : (product.totalReviews || reviews.length);
 
   const tabs = [
     { id: 'overview', label: 'Overview' },
@@ -15,7 +18,7 @@ const ProductTabs = ({ product }) => {
     { id: 'usage', label: 'How to Use' },
     { id: 'certifications', label: 'Certifications' },
     { id: 'faqs', label: 'FAQs' },
-    { id: 'reviews', label: `Reviews (${product.totalReviews})` }
+    { id: 'reviews', label: `Reviews (${reviewCount})` }
   ];
 
   return (
@@ -61,7 +64,7 @@ const ProductTabs = ({ product }) => {
             <ul className="space-y-3">
               {product.problemsSolved.map((problem, index) => (
                 <li key={index} className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                     ✗
                   </div>
                   <span className="text-gray-700">{problem}</span>
@@ -100,7 +103,7 @@ const ProductTabs = ({ product }) => {
         {activeTab === 'usage' && (
           <div>
             <h3 className="text-2xl font-bold mb-4">How to Use</h3>
-            <div className="bg-blue-50 p-6 rounded-lg mb-4">
+            <div className="bg-green-50 p-6 rounded-lg mb-4">
               <p className="text-gray-700 leading-relaxed">{product.howToUse}</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -191,9 +194,10 @@ const ProductTabs = ({ product }) => {
         {activeTab === 'reviews' && (
           <div>
             <ReviewsSection
-              reviews={product.reviews || []}
+              reviews={reviews}
               averageRating={product.averageRating}
-              totalReviews={product.totalReviews}
+              totalReviews={reviewCount}
+              productId={product.id}
             />
           </div>
         )}

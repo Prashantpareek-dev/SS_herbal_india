@@ -41,15 +41,15 @@ const AboutPage = () => {
                 <h3 className="font-bold text-lg mb-2">Quality First</h3>
                 <p className="text-gray-700">Every product undergoes rigorous quality testing to ensure maximum efficacy.</p>
               </div>
-              <div className="bg-blue-50 p-6 rounded-lg">
+              <div className="bg-green-100 p-6 rounded-lg">
                 <h3 className="font-bold text-lg mb-2">Customer Trust</h3>
                 <p className="text-gray-700">We build lasting relationships based on transparency and authenticity.</p>
               </div>
-              <div className="bg-yellow-50 p-6 rounded-lg">
+              <div className="bg-green-50 p-6 rounded-lg">
                 <h3 className="font-bold text-lg mb-2">Sustainability</h3>
                 <p className="text-gray-700">Committed to eco-friendly practices and ethical sourcing.</p>
               </div>
-              <div className="bg-purple-50 p-6 rounded-lg">
+              <div className="bg-green-100 p-6 rounded-lg">
                 <h3 className="font-bold text-lg mb-2">Innovation</h3>
                 <p className="text-gray-700">Blending ancient wisdom with modern scientific research.</p>
               </div>
